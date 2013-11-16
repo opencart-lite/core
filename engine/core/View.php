@@ -1,24 +1,21 @@
 <?php namespace Engine\Core;
 
 
-class View {
-    protected $template;
-    protected $children = array();
+final class View {
     protected $data = array();
     protected $output;
 
-    public function render() {
+    public function __construct(){}
 
-        foreach ($this->children as $child) {
-            $this->data[basename($child)] = $this->getChild($child);
-        }
+    public function render($template, $data)
+    {
 
-        if (file_exists(DIR_TEMPLATE . $this->template)) {
-            extract($this->data);
+        if (file_exists(DIR_TEMPLATE ."/". $template)) {
+            extract($data);
 
             ob_start();
 
-            require(DIR_TEMPLATE . $this->template);
+            require(DIR_TEMPLATE . "/" .$template);
 
             $this->output = ob_get_contents();
 
@@ -26,32 +23,11 @@ class View {
 
             return $this->output;
         } else {
-            trigger_error('Error: Could not load template ' . DIR_TEMPLATE . $this->template . '!');
-            exit();
+            try{
+                throw new CoreException('Could not load template ' . DIR_TEMPLATE . $template . '!');
+            }
+            catch (CoreException $e) {exit();}
         }
     }
 
-    public function add($value) {
-        $this->children = $value;
-    }
-
-
-    protected function getChild($child, $args = array()) {
-        $action = new Action($child, $args);
-
-        if (file_exists($action->getFile())) {
-            require_once($action->getFile());
-
-            $class = $action->getClass();
-
-            $controller = new $class($this->registry);
-
-            $controller->{$action->getMethod()}($action->getArgs());
-
-            return $controller->output;
-        } else {
-            trigger_error('Error: Could not load controller ' . $child . '!');
-            exit();
-        }
-    }
 }

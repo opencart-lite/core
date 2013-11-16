@@ -1,0 +1,17 @@
+RewriteEngine on
+
+### Localhost ############
+#RewriteBase /subdomain/
+##########################
+
+### Host ##############
+#RewriteBase /
+##########################
+
+RewriteBase /core/
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteCond %{REQUEST_URI} !.*\.(ico|gif|jpg|jpeg|png|js|css)
+
+RewriteRule ^([^?]*) index.php?$1 [L,QSA]
+#RewriteRule $ /core/index.php [QSA,L]

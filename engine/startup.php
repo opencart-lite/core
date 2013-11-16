@@ -1,11 +1,13 @@
 <?php
+//Dinamic Classes [engine context]
 set_include_path(get_include_path()
-    . PATH_SEPARATOR . PATH_CORE
-    . PATH_SEPARATOR . PATH_MODEL
-    . PATH_SEPARATOR . PATH_CONTROLLER
+    . PATH_SEPARATOR . PATH_ENGINE
+    . PATH_SEPARATOR . PATH_APP
 );
 
+//Static Classes [engine context]
+
+//Autoload Dinamic classes [engine context]
 function __autoload($class){
-    $path = explode('',$class);
-    require_once($class.'.php');
+    require_once(str_replace('\\', '/', $class).'.php');
 }

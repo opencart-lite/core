@@ -2,60 +2,64 @@
 
 
 final class Action {
-    protected $class;
-    protected $method;
-    protected $args = array();
+    protected $_ns;
+    protected $_controller;
+    protected $_method;
+    protected $_args = array();
 
-    public function __construct($route, $args = array()) {
-        $path = '';
+    public function __construct($route = '')
+    {
+
+        $route = $route ? $route : $_SERVER['QUERY_STRING'];
 
         $parts = explode('/', trim((string)$route,'/'));
 
-        foreach ($parts as $part) {
-            $path .= $part;
-
-            if (is_dir(DIR_APP . 'controller/' . $path)) {
-                $path .= '/';
-
-                array_shift($parts);
-
-                continue;
+        $parts = array_filter($parts,
+            function($elem){
+                return $elem ? true : false;
             }
+        );
 
-            if (is_file(DIR_APP . 'controller/' . str_replace(array('../', '..\\', '..'), '', $path) . '.php')) {
-                $this->file = DIR_APP . 'controller/' . str_replace(array('../', '..\\', '..'), '', $path) . '.php';
+        //$parts = array_diff($parts, array(''));
+        $this->_ns = $parts ? '\Controller\\' . ucfirst(array_shift($parts)) . '\\' : '\Controller\\';
 
-                $this->class = 'Controller' . preg_replace('/[^a-zA-Z0-9]/', '', $path);
+        $this->_controller = $parts ? $this->_ns . ucfirst(array_shift($parts)) : '\Controller\Common\Home';
 
-                array_shift($parts);
+        $this->_method = $parts ? array_shift($parts) : 'index';
 
-                break;
+        $keys = $values = array(); $key = '';
+
+        foreach($parts as $part){
+            if(!$key){
+                $key = $part;
+                $keys[] = $part;
+            }else{
+                $values[] = $part;
+                $key = '';
             }
         }
 
-        if ($args) {
-            $this->args = $args;
-        }
+        if(count($keys) != count($values)) $values[count($keys)] = '';
 
-        $method = array_shift($parts);
+        $this->_args = array_combine($keys, $values);
 
-        if ($method) {
-            $this->method = $method;
-        } else {
-            $this->method = 'index';
-        }
+        //$this->_args = $parts;
+
     }
 
-    public function getClass() {
-        return $this->class;
+    public function getController()
+    {
+        return $this->_controller;
     }
 
-    public function getMethod() {
-        return $this->method;
+    public function getMethod()
+    {
+        return $this->_method;
     }
 
-    public function getArgs() {
-        return $this->args;
+    public function getArgs()
+    {
+        return $this->_args;
     }
 
     public function __get($key) {}

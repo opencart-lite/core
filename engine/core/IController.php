@@ -1,6 +1,4 @@
 <?php namespace Engine\Core;
 
 
-interface IController {
-
-}
+interface IController {}
