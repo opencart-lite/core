@@ -1,4 +1,5 @@
-<?php
+<?php namespace Engine\Library;
+
 class Log {
 	private $filename;
 	
@@ -7,11 +8,11 @@ class Log {
 	}
 	
 	public function write($message) {
-		$file = DIR_LOGS . $this->filename;
+		$file = DIR_LOG . $this->filename;
 		
 		$handle = fopen($file, 'a+'); 
 		
-		fwrite($handle, date('Y-m-d G:i:s') . ' - ' . $message . "\n");
+		fwrite($handle, date('Y-m-d G:i:s') . " <-> \n" . $message . "\n");
 			
 		fclose($handle); 
 	}
