@@ -8,6 +8,11 @@ final class Front {
 
     protected function __construct(Action $action)
     {
+        $this->exec($action);
+    }
+
+    protected function exec(Action $action)
+    {
         if(class_exists($action->getController())) {
             $reflection = new ReflectionClass($action->getController());
             if($reflection->implementsInterface('Engine\Core\IController')) {
@@ -38,7 +43,7 @@ final class Front {
     //Singleton
     public static function getInstance(Action $action)
     {
-        self::$_instance = !(self::$_instance instanceof self) ? new self($action) : self::$_instance;
+        self::$_instance = !(self::$_instance instanceof self) ? new self($action) : self::$_instance->exec($action);
         return self::$_instance;
     }
 
