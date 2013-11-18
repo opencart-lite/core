@@ -13,7 +13,7 @@ class CoreException extends Exception {
         foreach($traces as $trace){
             if(isset($trace['line']) && isset($trace['file'])){
                 $str_display .= '<b>CORE EXCEPTION</b> <i>[' . $trace['class'] .  ']</i><b>:</b> '. $errstr . ' in <b>' . $trace['file'] . '</b> on line <b>' . $trace['line'] . '</b><br>';
-                $str_log .= 'CORE EXCEPTION ' . $trace['class'] . ':  ' . $errstr . ' in ' . $trace['file'] . ' on line ' . $trace['line'] . "\n";
+                $str_log .= 'CORE EXCEPTION [' . $trace['class'] . ']:  ' . $errstr . ' in ' . $trace['file'] . ' on line ' . $trace['line'] . "\n";
             }else{
                 $str_display .=  '<br><b>CORE EXCEPTION BLOCK</b><i>' . str_replace('#', '<br>#', $this->getTraceAsString()) . '</i><br><br>';
                 $str_log .= "CORE EXCEPTION #\n" . $this->getTraceAsString() . "\n";

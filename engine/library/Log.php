@@ -7,14 +7,17 @@ class Log {
 		$this->filename = $filename;
 	}
 	
-	public function write($message) {
+	public function write($message)
+    {
 		$file = DIR_LOG . $this->filename;
-		
-		$handle = fopen($file, 'a+'); 
-		
-		fwrite($handle, date('Y-m-d G:i:s') . " <-> \n" . $message . "\n");
-			
-		fclose($handle); 
+
+        file_put_contents($file, date('Y-m-d G:i:s') . " <-> \n" . $message . "\n", FILE_APPEND);
+
 	}
+
+    public function read()
+    {
+        return file_get_contents($this->filename);
+    }
 }
 ?>

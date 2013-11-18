@@ -1,4 +1,5 @@
-<?php
+<?php namespace Engine\Library;
+
 class Request {
 	public $get = array();
 	public $post = array();
