@@ -1,5 +1,8 @@
 <?php
 
+//Path Mode [MULTI] [STACK] [SINGLE] [DEFAULT]
+define('PATH_MODE', 'DEFAULT');
+
 // Path
 define('PATH_ENGINE', 'engine');
 define('PATH_APP', 'app');

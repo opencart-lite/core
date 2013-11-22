@@ -1,4 +1,6 @@
 <?php namespace Engine\Core;
+
+
 final class Registry {
 	private static $data = array();
 

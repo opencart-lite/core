@@ -17,6 +17,11 @@ set_include_path(get_include_path()
 
 
 //Autoload Dinamic classes [engine context]
-function __autoload($class){
+spl_autoload_register(function ($class) {
+    spl_autoload($class);
+});
+
+/*function __autoload($class){
     require_once(str_replace('\\', '/', $class).'.php');
-}
+}*/
+

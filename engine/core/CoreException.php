@@ -5,11 +5,12 @@ use Exception;
 
 class CoreException extends Exception {
 
-    public function __construct($errstr='')
+    public function __construct($errstr = '')
     {
         $traces =  $this->getTrace();
         $config = 'error_display';
         $str_log = $str_display ='';
+
         foreach($traces as $trace){
             if(isset($trace['line']) && isset($trace['file'])){
                 $str_display .= '<b>CORE EXCEPTION</b> <i>[' . $trace['class'] .  ']</i><b>:</b> '. $errstr . ' in <b>' . $trace['file'] . '</b> on line <b>' . $trace['line'] . '</b><br>';

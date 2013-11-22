@@ -11,6 +11,10 @@ require_once('config.php');
 //Startup
 require_once('engine/startup.php');
 
+// Loader
+$loader = new Engine\Core\Loader();
+\Engine\Core\Registry::set('load', $loader);
+
 // Request
 $request = new \Engine\Library\Request();
 \Engine\Core\Registry::set('request', $request);

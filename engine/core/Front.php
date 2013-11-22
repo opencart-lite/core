@@ -19,7 +19,8 @@ final class Front {
                 if($reflection->hasMethod($action->getMethod())) {
                     $controller = $reflection->newInstance();
                     $method = $reflection->getMethod($action->getMethod());
-                    $method->invoke($controller);
+                    $method->invoke($controller, $action->getArgs());
+                    //$method->invokeArgs($controller, $action->getArgs());
                 } else {
                     try{
                         throw new CoreException('METHOD ' . $action->getMethod(). ' NOT FOUND');
