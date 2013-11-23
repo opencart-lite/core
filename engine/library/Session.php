@@ -1,4 +1,6 @@
-<?php
+<?php  namespace Engine\Library;
+
+
 class Session {
 	public $data = array();
 			
@@ -18,4 +20,3 @@ class Session {
 		return session_id();
 	}
 }
-?>

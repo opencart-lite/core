@@ -25,4 +25,3 @@ final class Registry {
     private function __clone() {}
 
 }
-?>

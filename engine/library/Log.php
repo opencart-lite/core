@@ -1,5 +1,6 @@
 <?php namespace Engine\Library;
 
+
 class Log {
 	private $filename;
 	
@@ -20,4 +21,3 @@ class Log {
         return file_get_contents($this->filename);
     }
 }
-?>

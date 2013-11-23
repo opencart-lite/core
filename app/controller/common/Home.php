@@ -6,10 +6,14 @@ class Home extends Controller{
 
     public function index($args = array())
     {
-        $this->data['hello'] = 'HOME DOT TPL!!! VAR COOL';
 
+        $this->data['hello'] = 'HOME DOT TPL!!! VAR COOL';
+        $this->data['url'] = $this->url->link('common/home','world=hello&root=var');
+        $this->data['display'] = $this->request->get ? $this->request->get : '';
         $this->load->model('common/home');
         //$this->load->library('log');
+        //$this->session->data['user'] = 'll';
+        //var_dump($this->session->data);
 
         $page = $this->model_common_home->getPage();
 

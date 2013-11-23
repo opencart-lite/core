@@ -36,7 +36,7 @@ class PDO {
 
                     $data = array();
 
-                    while ($row = $object->fetch(PDO::FETCH_ASSOC)) {
+                    while ($row = $object->fetch(\PDO::FETCH_ASSOC)) {
                         $data[$i] = $row;
                         $i++;
                     }

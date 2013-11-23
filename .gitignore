@@ -1,4 +1,6 @@
 .git
 .idea
 /engine/log
+/engine/cache
+
 

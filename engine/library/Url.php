@@ -1,36 +1,28 @@
-<?php
+<?php namespace Engine\Library;
+
+
 class Url {
-	private $url;
-	private $ssl;
-	private $rewrite = array();
-	
+	private $_url;
+	private $_ssl;
+
 	public function __construct($url, $ssl = '') {
-		$this->url = $url;
-		$this->ssl = $ssl;
+		$this->_url = $url;
+		$this->_ssl = $ssl;
 	}
-		
-	public function addRewrite($rewrite) {
-		$this->rewrite[] = $rewrite;
-	}
-		
+
 	public function link($route, $args = '', $connection = 'NONSSL') {
 		if ($connection ==  'NONSSL') {
-			$url = $this->url;
+			$url = $this->_url;
 		} else {
-			$url = $this->ssl;	
+			$url = $this->_ssl;
 		}
 		
-		$url .= 'index.php?route=' . $route;
+		$url .= $route;
 			
 		if ($args) {
-			$url .= str_replace('&', '&amp;', '&' . ltrim($args, '&')); 
+			$url .= '?' . str_replace('&', '&amp;', ltrim($args, '&'));
 		}
-		
-		foreach ($this->rewrite as $rewrite) {
-			$url = $rewrite->rewrite($url);
-		}
-				
+
 		return $url;
 	}
 }
-?>

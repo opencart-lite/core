@@ -10,8 +10,11 @@ final class Action {
     public function __construct($route = '', $path_mode = '')
     {
         $path_mode = $path_mode ? $path_mode : PATH_MODE;
-        $route = $route ? $route : $_SERVER['QUERY_STRING'];
-        $parts = explode('/', trim((string)$route,'/'));
+        $route = $route ? trim((string)$route,'/') : trim($_SERVER['REQUEST_URI'],'/');
+        $split = explode('?', $route);
+        $route = array_shift($split);
+
+        $parts = explode('/', str_replace(DOMAIN, '', $route));
 
         //$parts = array_diff($parts, array(''));
         $parts = array_filter($parts,
@@ -42,7 +45,7 @@ final class Action {
                             break;
             case 'SINGLE':  $this->_args = array_shift($parts);
                             break;
-            default :       $this->_args = array();
+            default :       $this->_args = $_GET;
         }
 
     }
