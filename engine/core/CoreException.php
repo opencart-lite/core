@@ -8,8 +8,9 @@ class CoreException extends Exception {
     public function __construct($errstr = '')
     {
         $config = Registry::get('config');
+        $log = Registry::get('log');
         $traces =  $this->getTrace();
-        $str_log = $str_display ='';
+        $str_log = $str_display = '';
 
         $trace = array_shift($traces);
 
@@ -26,7 +27,6 @@ class CoreException extends Exception {
         }
 
         if ($config->get('config_error_log')) {
-            $log = new Log($config->get('config_error_filename'));
             $log->write($str_log);
         }
 

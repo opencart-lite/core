@@ -1,5 +1,6 @@
 <?php  namespace Engine\Library;
 
+use Engine\Core\CoreException;
 
 class Config {
 	private $_data = array();

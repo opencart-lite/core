@@ -15,13 +15,12 @@ require_once('engine/startup.php');
 $loader = new Engine\Core\Loader();
 \Engine\Core\Registry::set('load', $loader);
 
-//Config
-$config = new \Engine\Library\Config();
-
 // Database
 $db = new \Engine\Library\DB(DB_DRIVER, DB_HOSTNAME, DB_USERNAME, DB_PASSWORD, DB_DATABASE);
 \Engine\Core\Registry::set('db', $db);
 
+//Config
+$config = new \Engine\Library\Config();
 
 // Settings
 $query = $db->query("SELECT * FROM " . DB_PREFIX . "setting WHERE `group` = 'config'");
