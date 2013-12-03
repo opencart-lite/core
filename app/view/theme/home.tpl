@@ -1,4 +1,9 @@
 <?php echo $header; ?>
-<h2><a href="<?php echo $url; ?>">HELO WORLD I am <?php echo $hello; ?></a></h2>
-<?php var_dump($display); ?>
+<div id="logo">
+    <!--<img src="<?php echo HTTP_PUBLIC; ?>image/logo-ion.png" />-->
+    <img id="logo-name" src="<?php echo HTTP_PUBLIC; ?>image/logo-name-ion.png" />
+    <img id="logo-ufo" src="<?php echo HTTP_PUBLIC; ?>image/logo-ufo.png" />
+    <img id="logo-light-right" src="<?php echo HTTP_PUBLIC; ?>image/logo-light-right.png" />
+    <img id="logo-light-left" src="<?php echo HTTP_PUBLIC; ?>image/logo-light-left.png" />
+</div>
 <?php echo $footer; ?>

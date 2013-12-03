@@ -13,6 +13,9 @@ define('PATH_MODE', 'DEFAULT');
 define('PATH_ENGINE', 'engine');
 define('PATH_APP', 'app');
 
+//HTTP
+define('HTTP_PUBLIC', 'http://localhost/core/public/');
+
 // Directory
 define('DIR_TEMPLATE', __DIR__ . '/app/view/theme');
 define('DIR_LOG', __DIR__ . '/engine/log/');
@@ -21,9 +24,10 @@ define('DIR_CONFIG', __DIR__ . '/engine/config/');
 define('DIR_COMPILE', __DIR__ . '/bin/');
 define('DIR_DATABASE', __DIR__ . '/engine/database/');
 define('DIR_LANGUAGE', __DIR__ . '/app/language/');
+define('DIR_IMAGE', __DIR__ . '/public/image/');
 
-//Cache
-define('CACHE_TYPE', 'COOKIE');
+//Cache ([file] default)
+define('CACHE_TYPE', 'DEFAULT');
 //Cache Expire (3600 - hour)
 define('CACHE_EXPIRE', 3600);
 //Cache Session Limiter [nocache] [public] [private] [private_no_expire] ([nocache] default)

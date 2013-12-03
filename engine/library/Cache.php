@@ -29,7 +29,7 @@ class Cache {
             case 'MEMCACHE': return $this->getMemCache($key);
             case 'SESSION': return $this->getSessionCache($key);
             case 'COOKIE': return $this->getCookieCache($key);
-            case 'PHPCACHE': return $this->getAPCCache($key);
+            case 'APC': return $this->getAPCCache($key);
             default: return $this->getFileCache($key);
         }
 	}
@@ -43,7 +43,7 @@ class Cache {
                             break;
             case 'COOKIE': $this->setCookieCache($key, $value);
                            break;
-            case 'APCCACHE': $this->setAPCCache($key, $value);
+            case 'APC': $this->setAPCCache($key, $value);
                              break;
             default: $this->setFileCache($key, $value);
         }
@@ -58,7 +58,7 @@ class Cache {
                 break;
             case 'COOKIE': $this->deleteCookieCache($key);
                 break;
-            case 'APCCACHE': $this->deleteAPCCache($key);
+            case 'APC': $this->deleteAPCCache($key);
                 break;
             default: $this->deleteFileCache($key);
         }

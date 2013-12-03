@@ -1,3 +1,8 @@
+### Charset ########################
+# Charset Default
+##################################
+AddDefaultCharset UTF-8
+
 ### Files ########################
 # Deny files
 ##################################
@@ -85,3 +90,7 @@ RewriteRule ^([^?]*) index.php?$1 [L,QSA]
 #
 ################ NO REQUIRED MODULES ##########################
 # mod_gzip.c
+
+#Order Deny,Allow
+#Deny from all
+#Allow from 95.169.11.54
