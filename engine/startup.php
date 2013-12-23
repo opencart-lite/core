@@ -16,7 +16,7 @@ set_include_path(get_include_path()
 //Static Classes [engine context]
 
 
-//Autoload Dinamic classes [engine context]
+//Autoload Dynamic classes [engine context]
 spl_autoload_register(function ($class) {
     spl_autoload($class);
 });

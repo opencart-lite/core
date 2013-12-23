@@ -35,6 +35,9 @@ foreach ($query->rows as $setting) {
 
 \Engine\Core\Registry::set('config', $config);
 
+//Log
+\Engine\Core\Registry::set('log', new \Engine\Library\Log($config->get('config_error_filename')));
+
 // Request
 $request = new \Engine\Library\Request();
 \Engine\Core\Registry::set('request', $request);
@@ -45,8 +48,61 @@ $response->addHeader('Content-Type: text/html; charset=utf-8');
 $response->setCompression($config->get('config_compression'));
 \Engine\Core\Registry::set('response', $response);
 
-//Document
-\Engine\Core\Registry::set('language', new \Engine\Library\Language('english'));
+//Session
+$session = \Engine\Core\Registry::set('session', new \Engine\Library\Session());
+
+//Language Detection
+$languages = array();
+
+$query = $db->query("SELECT * FROM `" . DB_PREFIX . "language` WHERE status = '1'");
+
+foreach ($query->rows as $result) {
+    $languages[$result['code']] = $result;
+}
+
+$detect = '';
+
+if (isset($request->server['HTTP_ACCEPT_LANGUAGE']) && $request->server['HTTP_ACCEPT_LANGUAGE']) {
+    $browser_languages = explode(',', $request->server['HTTP_ACCEPT_LANGUAGE']);
+
+    foreach ($browser_languages as $browser_language) {
+        foreach ($languages as $key => $value) {
+            if ($value['status']) {
+                $locale = explode(',', $value['locale']);
+
+                if (in_array($browser_language, $locale)) {
+                    $detect = $key;
+                }
+            }
+        }
+    }
+}
+
+if (isset($session->data['language']) && array_key_exists($session->data['language'], $languages) && $languages[$session->data['language']]['status']) {
+    $code = $session->data['language'];
+} elseif (isset($request->cookie['language']) && array_key_exists($request->cookie['language'], $languages) && $languages[$request->cookie['language']]['status']) {
+    $code = $request->cookie['language'];
+} elseif ($detect) {
+    $code = $detect;
+} else {
+    $code = $config->get('config_language');
+}
+
+if (!isset($session->data['language']) || $session->data['language'] != $code) {
+    $session->data['language'] = $code;
+}
+
+if (!isset($request->cookie['language']) || $request->cookie['language'] != $code) {
+    setcookie('language', $code, time() + 60 * 60 * 24 * 30, '/', $request->server['HTTP_HOST']);
+}
+
+$config->set('config_language_id', $languages[$code]['id']);
+$config->set('config_language', $languages[$code]['code']);
+
+//Language
+$language = new Engine\Library\Language($languages[$code]['directory']);
+$language->load($languages[$code]['filename']);
+\Engine\Core\Registry::set('language', $language);
 
 //Document
 \Engine\Core\Registry::set('document', new \Engine\Library\Document());
@@ -60,12 +116,6 @@ $response->setCompression($config->get('config_compression'));
 //Cache
 \Engine\Core\Registry::set('cache', new \Engine\Library\Cache());
 
-//Session
-\Engine\Core\Registry::set('session', new \Engine\Library\Session());
-
-//Log
-\Engine\Core\Registry::set('log', new \Engine\Library\Log($config->get('config_error_filename')));
-
 //View
 \Engine\Core\Registry::set('view', new \Engine\Core\View());
 
@@ -73,7 +123,7 @@ $response->setCompression($config->get('config_compression'));
 $action = new \Engine\Core\Action();
 
 //Front
-$fc = \Engine\Core\Front::getInstance($action);
+\Engine\Core\Front::getInstance($action);
 
 //OUT
 $response->output();

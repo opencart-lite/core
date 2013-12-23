@@ -1,6 +1,8 @@
 <?php  namespace Engine\Library;
 
 
+use Engine\Core\CoreException;
+
 class Language {
 	private $default = 'english';
 	private $directory;

@@ -2,6 +2,7 @@
 .idea
 /engine/log
 /engine/cache
+/public/image
 /bin
 
 

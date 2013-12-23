@@ -26,7 +26,7 @@ define('DIR_DATABASE', __DIR__ . '/engine/database/');
 define('DIR_LANGUAGE', __DIR__ . '/app/language/');
 define('DIR_IMAGE', __DIR__ . '/public/image/');
 
-//Cache ([file] default)
+//Cache ([DEFAULT][FILE] [MEMCACHE] [SESSION] [COOKIE] [APCCACHE] file cache default)
 define('CACHE_TYPE', 'DEFAULT');
 //Cache Expire (3600 - hour)
 define('CACHE_EXPIRE', 3600);

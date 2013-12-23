@@ -66,8 +66,10 @@ final class Loader {
 
             $this->registry->set(str_replace('/', '_', $driver), new $class($hostname, $username, $password, $database));
         } else {
-            trigger_error('Error: Could not load database ' . $driver . '!');
-            exit();
+            try{
+                throw new CoreException('Error: Could not load database ' . $driver . '!');
+            }
+            catch (CoreException $e) {exit();}
         }
     }
 

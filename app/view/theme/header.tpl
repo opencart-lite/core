@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/html">
 <head>
-    <title></title>
+    <title><?php echo $title; ?></title>
     <script type="text/javascript" src="<?php echo HTTP_PUBLIC; ?>js/jquery-2.0.3.min.js"></script>
     <script type="text/javascript" src="<?php echo HTTP_PUBLIC; ?>js/jquery-ui-1.10.3.custom.min.js"></script>
     <script type="text/javascript" src="<?php echo HTTP_PUBLIC; ?>js/script.js"></script>
