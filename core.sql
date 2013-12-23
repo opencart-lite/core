@@ -1,3 +1,12 @@
+-- phpMyAdmin SQL Dump
+-- version 4.0.4
+-- http://www.phpmyadmin.net
+--
+-- Хост: localhost
+-- Время создания: Дек 23 2013 г., 21:02
+-- Версия сервера: 5.6.12-log
+-- Версия PHP: 5.4.16
+
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET time_zone = "+00:00";
 
@@ -8,7 +17,7 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8 */;
 
 --
--- Database: `core`
+-- База данных: `core`
 --
 CREATE DATABASE IF NOT EXISTS `core` DEFAULT CHARACTER SET utf8 COLLATE utf8_general_ci;
 USE `core`;
@@ -16,7 +25,7 @@ USE `core`;
 -- --------------------------------------------------------
 
 --
--- Structure `admin`
+-- Структура таблицы `admin`
 --
 
 CREATE TABLE IF NOT EXISTS `admin` (
@@ -34,10 +43,10 @@ CREATE TABLE IF NOT EXISTS `admin` (
   `date_added` datetime NOT NULL DEFAULT '0000-00-00 00:00:00',
   PRIMARY KEY (`id`),
   KEY `group_id` (`group_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=2 ;
 
 --
--- Dump `admin`
+-- Дамп данных таблицы `admin`
 --
 
 INSERT INTO `admin` (`id`, `group_id`, `username`, `password`, `salt`, `firstname`, `lastname`, `email`, `code`, `ip`, `status`, `date_added`) VALUES
@@ -46,7 +55,7 @@ INSERT INTO `admin` (`id`, `group_id`, `username`, `password`, `salt`, `firstnam
 -- --------------------------------------------------------
 
 --
--- Structure `admin_group`
+-- Структура таблицы `admin_group`
 --
 
 CREATE TABLE IF NOT EXISTS `admin_group` (
@@ -54,7 +63,7 @@ CREATE TABLE IF NOT EXISTS `admin_group` (
   `name` varchar(64) NOT NULL,
   `permission` text NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=2 ;
 
 --
 -- Дамп данных таблицы `admin_group`
@@ -66,7 +75,7 @@ INSERT INTO `admin_group` (`id`, `name`, `permission`) VALUES
 -- --------------------------------------------------------
 
 --
--- Dump `language`
+-- Структура таблицы `language`
 --
 
 CREATE TABLE IF NOT EXISTS `language` (
@@ -81,10 +90,10 @@ CREATE TABLE IF NOT EXISTS `language` (
   `status` tinyint(1) NOT NULL,
   PRIMARY KEY (`id`),
   KEY `name` (`name`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=3 ;
 
 --
--- Dump `language`
+-- Дамп данных таблицы `language`
 --
 
 INSERT INTO `language` (`id`, `name`, `code`, `locale`, `image`, `directory`, `filename`, `sort_order`, `status`) VALUES
@@ -94,7 +103,7 @@ INSERT INTO `language` (`id`, `name`, `code`, `locale`, `image`, `directory`, `f
 -- --------------------------------------------------------
 
 --
--- Structure `setting`
+-- Структура таблицы `setting`
 --
 
 CREATE TABLE IF NOT EXISTS `setting` (
@@ -104,10 +113,10 @@ CREATE TABLE IF NOT EXISTS `setting` (
   `value` text NOT NULL,
   `serialized` tinyint(1) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=8 ;
 
 --
--- Dump `setting`
+-- Дамп данных таблицы `setting`
 --
 
 INSERT INTO `setting` (`id`, `group`, `key`, `value`, `serialized`) VALUES

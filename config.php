@@ -45,7 +45,7 @@ define('DB_DRIVER', 'PDO');
 define('DB_PDO_DRIVER', 'mysql');
 
 define('DB_HOSTNAME', 'localhost');
-define('DB_USERNAME', 'root');
-define('DB_PASSWORD', 'jomedia123');
-define('DB_DATABASE', 'core');
+define('DB_USERNAME', '');
+define('DB_PASSWORD', '');
+define('DB_DATABASE', '');
 define('DB_PREFIX', '');
